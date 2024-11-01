@@ -1,0 +1,69 @@
+{
+  "originHash" : "d35941bd286adf0f7500bb3e83133c4f5bbd47b5ebe8234e3e12845a8aa35b57",
+  "pins" : [
+    {
+      "identity" : "autoreleasepoolshim",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/stefanspringer1/AutoreleasepoolShim",
+      "state" : {
+        "revision" : "d345d927f335db2d5e30e69ea943a045da9c16d0",
+        "version" : "1.0.3"
+      }
+    },
+    {
+      "identity" : "fastreplace",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/stefanspringer1/FastReplace",
+      "state" : {
+        "revision" : "d71bb262c3b1a8e2804c957d14e98864108fc7f5",
+        "version" : "1.0.2"
+      }
+    },
+    {
+      "identity" : "regextemplates",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/stefanspringer1/RegexTemplates.git",
+      "state" : {
+        "revision" : "5251e91728b6266beb3374011435d104e9643634",
+        "version" : "2.0.2"
+      }
+    },
+    {
+      "identity" : "regextemplateswithentities",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/stefanspringer1/RegexTemplatesWithEntities.git",
+      "state" : {
+        "revision" : "67299cf726f30b9fc233ddcce61cd8bc2fa420ea",
+        "version" : "2.0.2"
+      }
+    },
+    {
+      "identity" : "swift-argument-parser",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-argument-parser",
+      "state" : {
+        "revision" : "41982a3656a71c768319979febd796c6fd111d5c",
+        "version" : "1.5.0"
+      }
+    },
+    {
+      "identity" : "swift-syntax",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-syntax.git",
+      "state" : {
+        "revision" : "64889f0c732f210a935a0ad7cda38f77f876262d",
+        "version" : "509.1.1"
+      }
+    },
+    {
+      "identity" : "swiftutilities",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/stefanspringer1/SwiftUtilities",
+      "state" : {
+        "revision" : "1fd5a413cc96db8e2268c4287e10c08552a97e7f",
+        "version" : "0.1.56"
+      }
+    }
+  ],
+  "version" : 3
+}
