@@ -448,3 +448,23 @@ public struct ReplacementOf10GroupsRegex: Replacement {
         operation(s, search)
     }
 }
+
+public struct ReplacementByOperation: Replacement {
+    
+    public let description: String?
+    public let contexts: [String]?
+    public let contextsNot: [String]?
+    
+    private let operation: (String) -> String
+    
+    public init(_ description: String? = nil, contexts: [String]? = nil, contextsNot: [String]? = nil, operation: @escaping (String) -> String) {
+        self.description = description
+        self.contexts = contexts
+        self.contextsNot = contextsNot
+        self.operation = operation
+    }
+    
+    public func replacing(in s: String) -> String {
+        operation(s)
+    }
+}
