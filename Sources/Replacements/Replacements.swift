@@ -76,6 +76,48 @@ public struct ReplacementOfScalarWithScalar: Replacement {
     
 }
 
+public struct ReplacementOfScalarsWithScalars: Replacement {
+    
+    public let description: String?
+    public let contexts: [String]?
+    public let contextsNot: [String]?
+    
+    let map: [UnicodeScalar:UnicodeScalar]
+    
+    public init(_ description: String? = nil, contexts: [String]? = nil, contextsNot: [String]? = nil, _ map: [UnicodeScalar:UnicodeScalar]) {
+        self.description = description
+        self.contexts = contexts
+        self.contextsNot = contextsNot
+        self.map = map
+    }
+    
+    public func replacing(in s: String) -> String {
+        s.replacing(map)
+    }
+    
+}
+
+public struct ReplacementOfScalarsWithTexts: Replacement {
+    
+    public let description: String?
+    public let contexts: [String]?
+    public let contextsNot: [String]?
+    
+    let map: [UnicodeScalar:String]
+    
+    public init(_ description: String? = nil, contexts: [String]? = nil, contextsNot: [String]? = nil, _ map: [UnicodeScalar:String]) {
+        self.description = description
+        self.contexts = contexts
+        self.contextsNot = contextsNot
+        self.map = map
+    }
+    
+    public func replacing(in s: String) -> String {
+        s.replacing(map)
+    }
+    
+}
+
 public struct ReplacementOfScalarWithText: Replacement {
     
     public let description: String?
@@ -145,25 +187,44 @@ public struct ReplacementOfCodepointWithText: Replacement {
     
 }
 
-public struct ReplacementOfTwoGroupsRegexWithText: Replacement {
+public struct ReplacementOfCodepointsWithCodepoints: Replacement {
     
     public let description: String?
     public let contexts: [String]?
     public let contextsNot: [String]?
     
-    let search: any RegexComponent
-    let replacement: String
+    let map: [UInt32:UInt32]
     
-    public init(_ description: String? = nil, contexts: [String]? = nil, contextsNot: [String]? = nil, search: any RegexComponent, replacement: String) {
+    public init(_ description: String? = nil, contexts: [String]? = nil, contextsNot: [String]? = nil, _ map: [UInt32:UInt32]) {
         self.description = description
         self.contexts = contexts
         self.contextsNot = contextsNot
-        self.search = search
-        self.replacement = replacement
+        self.map = map
     }
     
     public func replacing(in s: String) -> String {
-        s.replacing(search, with: replacement)
+        s.replacing(map)
+    }
+    
+}
+
+public struct ReplacementOfCodepointsWithTexts: Replacement {
+    
+    public let description: String?
+    public let contexts: [String]?
+    public let contextsNot: [String]?
+    
+    let map: [UInt32:String]
+    
+    public init(_ description: String? = nil, contexts: [String]? = nil, contextsNot: [String]? = nil, _ map: [UInt32:String]) {
+        self.description = description
+        self.contexts = contexts
+        self.contextsNot = contextsNot
+        self.map = map
+    }
+    
+    public func replacing(in s: String) -> String {
+        s.replacing(map)
     }
     
 }
