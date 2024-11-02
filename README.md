@@ -5,7 +5,9 @@ This package defines the defintion of the protocol `Replacement` with several im
 E.g. together with the [RegexTemplates](https://github.com/stefanspringer1/RegexTemplates) package you could write:
 
 ```swift
-let replacement: Replacement = ReplacementOf2GroupsRegex(search: /([a-z]+)/) { #replacingWithTemplate(in: $0, replacing: $1, withTemplate: "$1 $1") }
+let replacement: Replacement = ReplacementOf2GroupsRegex(search: /([a-z]+)/) { 
+    #replacingWithTemplate(in: $0, replacing: $1, withTemplate: "$1 $1")
+}
 print(replacement.replacing(in: "Hello")) // prints "Hello ello"
 ```
 
