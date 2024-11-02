@@ -1,6 +1,8 @@
 # Replacements
 
-This package defines the defintion of the protocol `Replacement` with several implementations to define replacements in texts. The `contexts` and `contextsNot` are optional `String` arrays that can be used by an application, they are not used in this package.
+This package might be used to organise your textual replacements.
+
+The package defines the defintion of the protocol `Replacement` with several implementations to define replacements in texts. The `contexts` and `contextsNot` are optional `String` arrays that can be used by an application, they are not used in this package.
 
 E.g. together with the [RegexTemplates](https://github.com/stefanspringer1/RegexTemplates) package you could write:
 
