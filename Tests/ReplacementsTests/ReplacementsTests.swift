@@ -3,18 +3,6 @@ import Testing
 import RegexTemplates
 import RegexTemplatesWithEntities
 
-@Test func xxx() async throws {
-    
-    func test1(_ text: String? = nil) {}
-    test1() // OK
-    
-    func test2(_ text: String? = nil, _ array: [Int]) {}
-    
-    test2("hello", [1, 2, 3]) // OK
-    test2([1, 2, 3]) // OK
-    
-}
-
 @Test func testReplacementOf2GroupsRegexWithTemplate() async throws {
     let replacement: Replacement = ReplacementOf2GroupsRegex(search: /([a-z]+)/) { #replacingWithTemplate(in: $0, replacing: $1, withTemplate: "$1 $1")
     }
@@ -35,11 +23,23 @@ import RegexTemplatesWithEntities
     #expect(replacement.replacing(in: "Hello") == "Hallo")
 }
 
-ReplacementOfScalarsWithScalars
-
 @Test func testReplacementOfCodepointsWithCodepoints() async throws {
-    let replacement = ReplacementOfCodepointsWithTexts([
-        0x65: 0x62,
+    let replacement = ReplacementOfCodepointsWithCodepoints([
+        0x65: 0x61,
+    ])
+    #expect(replacement.replacing(in: "Hello") == "Hallo")
+}
+
+@Test func testReplacementOfScalarsWithTexts() async throws {
+    let replacement = ReplacementOfScalarsWithScalars([
+        UnicodeScalar("e"): "a",
+    ])
+    #expect(replacement.replacing(in: "Hello") == "Hallo")
+}
+
+@Test func testReplacementOfScalarsWithScalars() async throws {
+    let replacement = ReplacementOfScalarsWithScalars([
+        UnicodeScalar("e"): UnicodeScalar("a"),
     ])
     #expect(replacement.replacing(in: "Hello") == "Hallo")
 }
