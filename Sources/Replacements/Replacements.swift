@@ -91,6 +91,13 @@ public struct ReplacementOfScalarsWithScalars: Replacement {
         self.map = map
     }
     
+    public init(contexts: [String]? = nil, contextsNot: [String]? = nil, _ map: [UnicodeScalar:UnicodeScalar]) {
+        self.description = nil
+        self.contexts = contexts
+        self.contextsNot = contextsNot
+        self.map = map
+    }
+    
     public func replacing(in s: String) -> String {
         s.replacing(map)
     }
@@ -107,6 +114,13 @@ public struct ReplacementOfScalarsWithTexts: Replacement {
     
     public init(_ description: String? = nil, contexts: [String]? = nil, contextsNot: [String]? = nil, _ map: [UnicodeScalar:String]) {
         self.description = description
+        self.contexts = contexts
+        self.contextsNot = contextsNot
+        self.map = map
+    }
+    
+    public init(contexts: [String]? = nil, contextsNot: [String]? = nil, _ map: [UnicodeScalar:String]) {
+        self.description = nil
         self.contexts = contexts
         self.contextsNot = contextsNot
         self.map = map
@@ -202,6 +216,13 @@ public struct ReplacementOfCodepointsWithCodepoints: Replacement {
         self.map = map
     }
     
+    public init(contexts: [String]? = nil, contextsNot: [String]? = nil, _ map: [UInt32:UInt32]) {
+        self.description = nil
+        self.contexts = contexts
+        self.contextsNot = contextsNot
+        self.map = map
+    }
+    
     public func replacing(in s: String) -> String {
         s.replacing(map)
     }
@@ -218,6 +239,13 @@ public struct ReplacementOfCodepointsWithTexts: Replacement {
     
     public init(_ description: String? = nil, contexts: [String]? = nil, contextsNot: [String]? = nil, _ map: [UInt32:String]) {
         self.description = description
+        self.contexts = contexts
+        self.contextsNot = contextsNot
+        self.map = map
+    }
+    
+    public init(contexts: [String]? = nil, contextsNot: [String]? = nil, _ map: [UInt32:String]) {
+        self.description = nil
         self.contexts = contexts
         self.contextsNot = contextsNot
         self.map = map
