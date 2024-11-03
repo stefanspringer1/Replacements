@@ -15,7 +15,7 @@ let package = Package(
             targets: ["Replacements"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/stefanspringer1/FastReplace", from: "1.0.2"),
+        .package(url: "https://github.com/stefanspringer1/FastReplace", from: "1.0.7"),
         .package(url: "https://github.com/stefanspringer1/RegexTemplates.git", from: "2.0.2"),
         .package(url: "https://github.com/stefanspringer1/RegexTemplatesWithEntities.git", from: "2.0.2"),
     ],

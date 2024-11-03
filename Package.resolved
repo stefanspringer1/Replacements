@@ -1,5 +1,5 @@
 {
-  "originHash" : "d35941bd286adf0f7500bb3e83133c4f5bbd47b5ebe8234e3e12845a8aa35b57",
+  "originHash" : "582ea03c0388cf74dc02da31d8e9ea0ab15b2c24361449c802f1f3f72316e257",
   "pins" : [
     {
       "identity" : "autoreleasepoolshim",
@@ -15,8 +15,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/stefanspringer1/FastReplace",
       "state" : {
-        "revision" : "d71bb262c3b1a8e2804c957d14e98864108fc7f5",
-        "version" : "1.0.2"
+        "revision" : "7be1e4861ab5f3d316ca789dab55f01601008005",
+        "version" : "1.0.7"
       }
     },
     {
