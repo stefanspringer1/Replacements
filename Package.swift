@@ -16,8 +16,8 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/stefanspringer1/FastReplace", from: "1.0.7"),
-        .package(url: "https://github.com/stefanspringer1/RegexTemplates.git", from: "2.0.2"),
-        .package(url: "https://github.com/stefanspringer1/RegexTemplatesWithEntities.git", from: "3.0.0"),
+        .package(url: "https://github.com/stefanspringer1/RegexTemplates.git", from: "2.0.5"),
+        .package(url: "https://github.com/stefanspringer1/RegexTemplatesWithEntities.git", from: "4.0.0"),
     ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
