@@ -30,6 +30,31 @@ public struct ReplacementOfTextWithText: Replacement {
     
 }
 
+public struct ReplacementOfTextsWithTexts: Replacement {
+    
+    public let description: String?
+    public let contexts: [String]?
+    public let contextsNot: [String]?
+    
+    let searchAndReplacement: [String:String]
+    
+    public init(_ description: String? = nil, contexts: [String]? = nil, contextsNot: [String]? = nil, searchAndReplacement: [String:String]) {
+        self.description = description
+        self.contexts = contexts
+        self.contextsNot = contextsNot
+        self.searchAndReplacement = searchAndReplacement
+    }
+    
+    public func replacing(in _text: String) -> String {
+        var text = _text
+        for (search,replacement) in searchAndReplacement {
+            text.replace(search, with: replacement)
+        }
+        return text
+    }
+    
+}
+
 public struct ReplacementOfRegexWithText: Replacement {
     
     public let description: String?
