@@ -13,6 +13,8 @@ let replacement: Replacement = ReplacementOf2GroupsRegex(search: /([a-z]+)/) {
 print(replacement.replacing(in: "Hello")) // prints "Hello ello"
 ```
 
+All regular expression used should be (unchecked) sendable!
+
 In an analogous way you can also use [RegexTemplatesWithEntities](https://github.com/stefanspringer1/RegexTemplatesWithEntities).
 
 The [FastReplace](https://github.com/stefanspringer1/FastReplace) package is used to be able to define efficient replacemants of Unicode scalars and `UInt32` code points.

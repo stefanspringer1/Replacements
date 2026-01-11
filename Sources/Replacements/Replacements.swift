@@ -1,13 +1,13 @@
 import FastReplace
 
-public protocol Replacement {
+public protocol Replacement: Sendable {
     var description: String? { get }
     var contexts: [String]? { get }
     var contextsNot: [String]? { get }
     func replacing(in text: String) -> String
 }
 
-public struct ReplacementOfTextWithText: Replacement {
+public struct ReplacementOfTextWithText: Replacement, @unchecked Sendable {
     
     public let description: String?
     public let contexts: [String]?
@@ -30,7 +30,7 @@ public struct ReplacementOfTextWithText: Replacement {
     
 }
 
-public struct ReplacementOfTextsWithTexts: Replacement {
+public struct ReplacementOfTextsWithTexts: Replacement, @unchecked Sendable {
     
     public let description: String?
     public let contexts: [String]?
@@ -55,7 +55,7 @@ public struct ReplacementOfTextsWithTexts: Replacement {
     
 }
 
-public struct ReplacementOfRegexWithText: Replacement {
+public struct ReplacementOfRegexWithText: Replacement, @unchecked Sendable {
     
     public let description: String?
     public let contexts: [String]?
@@ -78,7 +78,7 @@ public struct ReplacementOfRegexWithText: Replacement {
     
 }
 
-public struct ReplacementOfScalarWithScalar: Replacement {
+public struct ReplacementOfScalarWithScalar: Replacement, @unchecked Sendable {
     
     public let description: String?
     public let contexts: [String]?
@@ -101,7 +101,7 @@ public struct ReplacementOfScalarWithScalar: Replacement {
     
 }
 
-public struct ReplacementOfScalarsWithScalars: Replacement {
+public struct ReplacementOfScalarsWithScalars: Replacement, @unchecked Sendable {
     
     public let description: String?
     public let contexts: [String]?
@@ -129,7 +129,7 @@ public struct ReplacementOfScalarsWithScalars: Replacement {
     
 }
 
-public struct ReplacementOfScalarsWithTexts: Replacement {
+public struct ReplacementOfScalarsWithTexts: Replacement, @unchecked Sendable {
     
     public let description: String?
     public let contexts: [String]?
@@ -157,7 +157,7 @@ public struct ReplacementOfScalarsWithTexts: Replacement {
     
 }
 
-public struct ReplacementOfScalarWithText: Replacement {
+public struct ReplacementOfScalarWithText: Replacement, @unchecked Sendable {
     
     public let description: String?
     public let contexts: [String]?
@@ -180,7 +180,7 @@ public struct ReplacementOfScalarWithText: Replacement {
     
 }
 
-public struct ReplacementOfCodepointWithCodepoint: Replacement {
+public struct ReplacementOfCodepointWithCodepoint: Replacement, @unchecked Sendable {
     
     public let description: String?
     public let contexts: [String]?
@@ -203,7 +203,7 @@ public struct ReplacementOfCodepointWithCodepoint: Replacement {
     
 }
 
-public struct ReplacementOfCodepointWithText: Replacement {
+public struct ReplacementOfCodepointWithText: Replacement, @unchecked Sendable {
     
     public let description: String?
     public let contexts: [String]?
@@ -226,7 +226,7 @@ public struct ReplacementOfCodepointWithText: Replacement {
     
 }
 
-public struct ReplacementOfCodepointsWithCodepoints: Replacement {
+public struct ReplacementOfCodepointsWithCodepoints: Replacement, @unchecked Sendable {
     
     public let description: String?
     public let contexts: [String]?
@@ -254,7 +254,7 @@ public struct ReplacementOfCodepointsWithCodepoints: Replacement {
     
 }
 
-public struct ReplacementOfCodepointsWithTexts: Replacement {
+public struct ReplacementOfCodepointsWithTexts: Replacement, @unchecked Sendable {
     
     public let description: String?
     public let contexts: [String]?
@@ -282,7 +282,7 @@ public struct ReplacementOfCodepointsWithTexts: Replacement {
     
 }
 
-public struct ReplacementOf1GroupRegex: Replacement {
+public struct ReplacementOf1GroupRegex: Replacement, @unchecked Sendable {
     
     public let description: String?
     public let contexts: [String]?
@@ -304,7 +304,7 @@ public struct ReplacementOf1GroupRegex: Replacement {
     }
 }
 
-public struct ReplacementOf2GroupsRegex: Replacement {
+public struct ReplacementOf2GroupsRegex: Replacement, @unchecked Sendable {
     
     public let description: String?
     public let contexts: [String]?
@@ -326,7 +326,7 @@ public struct ReplacementOf2GroupsRegex: Replacement {
     }
 }
 
-public struct ReplacementOf3GroupsRegex: Replacement {
+public struct ReplacementOf3GroupsRegex: Replacement, @unchecked Sendable {
     
     public let description: String?
     public let contexts: [String]?
@@ -348,7 +348,7 @@ public struct ReplacementOf3GroupsRegex: Replacement {
     }
 }
 
-public struct ReplacementOf4GroupsRegex: Replacement {
+public struct ReplacementOf4GroupsRegex: Replacement, @unchecked Sendable {
     
     public let description: String?
     public let contexts: [String]?
@@ -370,7 +370,7 @@ public struct ReplacementOf4GroupsRegex: Replacement {
     }
 }
 
-public struct ReplacementOf5GroupsRegex: Replacement {
+public struct ReplacementOf5GroupsRegex: Replacement, @unchecked Sendable {
     
     public let description: String?
     public let contexts: [String]?
@@ -392,7 +392,7 @@ public struct ReplacementOf5GroupsRegex: Replacement {
     }
 }
 
-public struct ReplacementOf6GroupsRegex: Replacement {
+public struct ReplacementOf6GroupsRegex: Replacement, @unchecked Sendable {
     
     public let description: String?
     public let contexts: [String]?
@@ -414,7 +414,7 @@ public struct ReplacementOf6GroupsRegex: Replacement {
     }
 }
 
-public struct ReplacementOf7GroupsRegex: Replacement {
+public struct ReplacementOf7GroupsRegex: Replacement, @unchecked Sendable {
     
     public let description: String?
     public let contexts: [String]?
@@ -436,7 +436,7 @@ public struct ReplacementOf7GroupsRegex: Replacement {
     }
 }
 
-public struct ReplacementOf8GroupsRegex: Replacement {
+public struct ReplacementOf8GroupsRegex: Replacement, @unchecked Sendable {
     
     public let description: String?
     public let contexts: [String]?
@@ -458,7 +458,7 @@ public struct ReplacementOf8GroupsRegex: Replacement {
     }
 }
 
-public struct ReplacementOf9GroupsRegex: Replacement {
+public struct ReplacementOf9GroupsRegex: Replacement, @unchecked Sendable {
     
     public let description: String?
     public let contexts: [String]?
@@ -480,7 +480,7 @@ public struct ReplacementOf9GroupsRegex: Replacement {
     }
 }
 
-public struct ReplacementOf10GroupsRegex: Replacement {
+public struct ReplacementOf10GroupsRegex: Replacement, @unchecked Sendable {
     
     public let description: String?
     public let contexts: [String]?
@@ -502,7 +502,7 @@ public struct ReplacementOf10GroupsRegex: Replacement {
     }
 }
 
-public struct ReplacementByOperation: Replacement {
+public struct ReplacementByOperation: Replacement, @unchecked Sendable {
     
     public let description: String?
     public let contexts: [String]?
