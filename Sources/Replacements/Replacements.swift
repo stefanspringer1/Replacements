@@ -36,9 +36,9 @@ public struct ReplacementOfTextsWithTexts: Replacement, @unchecked Sendable {
     public let contexts: [String]?
     public let contextsNot: [String]?
     
-    let searchAndReplacement: [String:String]
+    let searchAndReplacement: [(String,String)]
     
-    public init(_ description: String? = nil, contexts: [String]? = nil, contextsNot: [String]? = nil, searchAndReplacement: [String:String]) {
+    public init(_ description: String? = nil, contexts: [String]? = nil, contextsNot: [String]? = nil, searchAndReplacement: [(String,String)]) {
         self.description = description
         self.contexts = contexts
         self.contextsNot = contextsNot
