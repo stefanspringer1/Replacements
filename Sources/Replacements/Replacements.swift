@@ -29,10 +29,10 @@ public struct ReplacementOfTextWithText<Context>: Replacement<Context>, @uncheck
     let search: String
     let replacement: String
     
-    public init(_ description: String? = nil, contexts: [Context]? = nil, contextsNot: [Context]? = nil, search: String, replacement: String) {
+    public init(_ description: String? = nil, contexts: [Context?]? = nil, contextsNot: [Context?]? = nil, search: String, replacement: String) {
         self.description = description
-        self.contexts = contexts
-        self.contextsNot = contextsNot
+        self.contexts = contexts?.compactMap{ $0 }
+        self.contextsNot = contextsNot?.compactMap{ $0 }
         self.search = search
         self.replacement = replacement
     }
@@ -61,10 +61,10 @@ public struct ReplacementOfTextsWithTexts<Context>: Replacement<Context>, @unche
     
     let searchAndReplacement: [(String,String)]
     
-    public init(_ description: String? = nil, contexts: [Context]? = nil, contextsNot: [Context]? = nil, searchAndReplacement: [(String,String)]) {
+    public init(_ description: String? = nil, contexts: [Context?]? = nil, contextsNot: [Context?]? = nil, searchAndReplacement: [(String,String)]) {
         self.description = description
-        self.contexts = contexts
-        self.contextsNot = contextsNot
+        self.contexts = contexts?.compactMap{ $0 }
+        self.contextsNot = contextsNot?.compactMap{ $0 }
         self.searchAndReplacement = searchAndReplacement
     }
     
@@ -96,10 +96,10 @@ public struct ReplacementOfRegexWithText<Context>: Replacement<Context>, @unchec
     let search: any RegexComponent
     let replacement: String
     
-    public init(_ description: String? = nil, contexts: [Context]? = nil, contextsNot: [Context]? = nil, search: any RegexComponent, replacement: String) {
+    public init(_ description: String? = nil, contexts: [Context?]? = nil, contextsNot: [Context?]? = nil, search: any RegexComponent, replacement: String) {
         self.description = description
-        self.contexts = contexts
-        self.contextsNot = contextsNot
+        self.contexts = contexts?.compactMap{ $0 }
+        self.contextsNot = contextsNot?.compactMap{ $0 }
         self.search = search
         self.replacement = replacement
     }
@@ -129,10 +129,10 @@ public struct ReplacementOfScalarWithScalar<Context>: Replacement<Context>, @unc
     let search: UnicodeScalar
     let replacement: UnicodeScalar
     
-    public init(_ description: String? = nil, contexts: [Context]? = nil, contextsNot: [Context]? = nil, search: UnicodeScalar, replacement: UnicodeScalar) {
+    public init(_ description: String? = nil, contexts: [Context?]? = nil, contextsNot: [Context?]? = nil, search: UnicodeScalar, replacement: UnicodeScalar) {
         self.description = description
-        self.contexts = contexts
-        self.contextsNot = contextsNot
+        self.contexts = contexts?.compactMap{ $0 }
+        self.contextsNot = contextsNot?.compactMap{ $0 }
         self.search = search
         self.replacement = replacement
     }
@@ -161,17 +161,17 @@ public struct ReplacementOfScalarsWithScalars<Context>: Replacement<Context>, @u
     
     let map: [UnicodeScalar:UnicodeScalar]
     
-    public init(_ description: String? = nil, contexts: [Context]? = nil, contextsNot: [Context]? = nil, _ map: [UnicodeScalar:UnicodeScalar]) {
+    public init(_ description: String? = nil, contexts: [Context?]? = nil, contextsNot: [Context?]? = nil, _ map: [UnicodeScalar:UnicodeScalar]) {
         self.description = description
-        self.contexts = contexts
-        self.contextsNot = contextsNot
+        self.contexts = contexts?.compactMap{ $0 }
+        self.contextsNot = contextsNot?.compactMap{ $0 }
         self.map = map
     }
     
-    public init(contexts: [Context]? = nil, contextsNot: [Context]? = nil, _ map: [UnicodeScalar:UnicodeScalar]) {
+    public init(contexts: [Context?]? = nil, contextsNot: [Context?]? = nil, _ map: [UnicodeScalar:UnicodeScalar]) {
         self.description = nil
-        self.contexts = contexts
-        self.contextsNot = contextsNot
+        self.contexts = contexts?.compactMap{ $0 }
+        self.contextsNot = contextsNot?.compactMap{ $0 }
         self.map = map
     }
     
@@ -198,17 +198,17 @@ public struct ReplacementOfScalarsWithTexts<Context>: Replacement<Context>, @unc
     
     let map: [UnicodeScalar:String]
     
-    public init(_ description: String? = nil, contexts: [Context]? = nil, contextsNot: [Context]? = nil, _ map: [UnicodeScalar:String]) {
+    public init(_ description: String? = nil, contexts: [Context?]? = nil, contextsNot: [Context?]? = nil, _ map: [UnicodeScalar:String]) {
         self.description = description
-        self.contexts = contexts
-        self.contextsNot = contextsNot
+        self.contexts = contexts?.compactMap{ $0 }
+        self.contextsNot = contextsNot?.compactMap{ $0 }
         self.map = map
     }
     
-    public init(contexts: [Context]? = nil, contextsNot: [Context]? = nil, _ map: [UnicodeScalar:String]) {
+    public init(contexts: [Context?]? = nil, contextsNot: [Context?]? = nil, _ map: [UnicodeScalar:String]) {
         self.description = nil
-        self.contexts = contexts
-        self.contextsNot = contextsNot
+        self.contexts = contexts?.compactMap{ $0 }
+        self.contextsNot = contextsNot?.compactMap{ $0 }
         self.map = map
     }
     
@@ -236,10 +236,10 @@ public struct ReplacementOfScalarWithText<Context>: Replacement<Context>, @unche
     let search: UnicodeScalar
     let replacement: String
     
-    public init(_ description: String? = nil, contexts: [Context]? = nil, contextsNot: [Context]? = nil, search: UnicodeScalar, replacement: String) {
+    public init(_ description: String? = nil, contexts: [Context?]? = nil, contextsNot: [Context?]? = nil, search: UnicodeScalar, replacement: String) {
         self.description = description
-        self.contexts = contexts
-        self.contextsNot = contextsNot
+        self.contexts = contexts?.compactMap{ $0 }
+        self.contextsNot = contextsNot?.compactMap{ $0 }
         self.search = search
         self.replacement = replacement
     }
@@ -269,10 +269,10 @@ public struct ReplacementOfCodepointWithCodepoint<Context>: Replacement<Context>
     let search: UInt32
     let replacement: UInt32
     
-    public init(_ description: String? = nil, contexts: [Context]? = nil, contextsNot: [Context]? = nil, search: UInt32, replacement: UInt32) {
+    public init(_ description: String? = nil, contexts: [Context?]? = nil, contextsNot: [Context?]? = nil, search: UInt32, replacement: UInt32) {
         self.description = description
-        self.contexts = contexts
-        self.contextsNot = contextsNot
+        self.contexts = contexts?.compactMap{ $0 }
+        self.contextsNot = contextsNot?.compactMap{ $0 }
         self.search = search
         self.replacement = replacement
     }
@@ -302,10 +302,10 @@ public struct ReplacementOfCodepointWithText<Context>: Replacement<Context>, @un
     let search: UInt32
     let replacement: String
     
-    public init(_ description: String? = nil, contexts: [Context]? = nil, contextsNot: [Context]? = nil, search: UInt32, replacement: String) {
+    public init(_ description: String? = nil, contexts: [Context?]? = nil, contextsNot: [Context?]? = nil, search: UInt32, replacement: String) {
         self.description = description
-        self.contexts = contexts
-        self.contextsNot = contextsNot
+        self.contexts = contexts?.compactMap{ $0 }
+        self.contextsNot = contextsNot?.compactMap{ $0 }
         self.search = search
         self.replacement = replacement
     }
@@ -334,17 +334,17 @@ public struct ReplacementOfCodepointsWithCodepoints<Context>: Replacement<Contex
     
     let map: [UInt32:UInt32]
     
-    public init(_ description: String? = nil, contexts: [Context]? = nil, contextsNot: [Context]? = nil, _ map: [UInt32:UInt32]) {
+    public init(_ description: String? = nil, contexts: [Context?]? = nil, contextsNot: [Context?]? = nil, _ map: [UInt32:UInt32]) {
         self.description = description
-        self.contexts = contexts
-        self.contextsNot = contextsNot
+        self.contexts = contexts?.compactMap{ $0 }
+        self.contextsNot = contextsNot?.compactMap{ $0 }
         self.map = map
     }
     
-    public init(contexts: [Context]? = nil, contextsNot: [Context]? = nil, _ map: [UInt32:UInt32]) {
+    public init(contexts: [Context?]? = nil, contextsNot: [Context?]? = nil, _ map: [UInt32:UInt32]) {
         self.description = nil
-        self.contexts = contexts
-        self.contextsNot = contextsNot
+        self.contexts = contexts?.compactMap{ $0 }
+        self.contextsNot = contextsNot?.compactMap{ $0 }
         self.map = map
     }
     
@@ -371,17 +371,17 @@ public struct ReplacementOfCodepointsWithTexts<Context>: Replacement<Context>, @
     
     let map: [UInt32:String]
     
-    public init(_ description: String? = nil, contexts: [Context]? = nil, contextsNot: [Context]? = nil, _ map: [UInt32:String]) {
+    public init(_ description: String? = nil, contexts: [Context?]? = nil, contextsNot: [Context?]? = nil, _ map: [UInt32:String]) {
         self.description = description
-        self.contexts = contexts
-        self.contextsNot = contextsNot
+        self.contexts = contexts?.compactMap{ $0 }
+        self.contextsNot = contextsNot?.compactMap{ $0 }
         self.map = map
     }
     
-    public init(contexts: [Context]? = nil, contextsNot: [Context]? = nil, _ map: [UInt32:String]) {
+    public init(contexts: [Context?]? = nil, contextsNot: [Context?]? = nil, _ map: [UInt32:String]) {
         self.description = nil
-        self.contexts = contexts
-        self.contextsNot = contextsNot
+        self.contexts = contexts?.compactMap{ $0 }
+        self.contextsNot = contextsNot?.compactMap{ $0 }
         self.map = map
     }
     
@@ -409,10 +409,10 @@ public struct ReplacementOf1GroupRegex<Context>: Replacement<Context>, @unchecke
     private let search: Regex<(Substring)>
     private let operation: (String, Regex<(Substring)>) -> String
     
-    public init(_ description: String? = nil, contexts: [Context]? = nil, contextsNot: [Context]? = nil, search: Regex<(Substring)>, operation: @escaping (String, Regex<(Substring)>) -> String) {
+    public init(_ description: String? = nil, contexts: [Context?]? = nil, contextsNot: [Context?]? = nil, search: Regex<(Substring)>, operation: @escaping (String, Regex<(Substring)>) -> String) {
         self.description = description
-        self.contexts = contexts
-        self.contextsNot = contextsNot
+        self.contexts = contexts?.compactMap{ $0 }
+        self.contextsNot = contextsNot?.compactMap{ $0 }
         self.search = search
         self.operation = operation
     }
@@ -441,10 +441,10 @@ public struct ReplacementOf2GroupsRegex<Context>: Replacement<Context>, @uncheck
     private let search: Regex<(Substring, Substring)>
     private let operation: (String, Regex<(Substring, Substring)>) -> String
     
-    public init(_ description: String? = nil, contexts: [Context]? = nil, contextsNot: [Context]? = nil, search: Regex<(Substring, Substring)>, operation: @escaping (String, Regex<(Substring, Substring)>) -> String) {
+    public init(_ description: String? = nil, contexts: [Context?]? = nil, contextsNot: [Context?]? = nil, search: Regex<(Substring, Substring)>, operation: @escaping (String, Regex<(Substring, Substring)>) -> String) {
         self.description = description
-        self.contexts = contexts
-        self.contextsNot = contextsNot
+        self.contexts = contexts?.compactMap{ $0 }
+        self.contextsNot = contextsNot?.compactMap{ $0 }
         self.search = search
         self.operation = operation
     }
@@ -473,10 +473,10 @@ public struct ReplacementOf3GroupsRegex<Context>: Replacement<Context>, @uncheck
     private let search: Regex<(Substring, Substring, Substring)>
     private let operation: (String, Regex<(Substring, Substring, Substring)>) -> String
     
-    public init(_ description: String? = nil, contexts: [Context]? = nil, contextsNot: [Context]? = nil, search: Regex<(Substring, Substring, Substring)>, operation: @escaping (String, Regex<(Substring, Substring, Substring)>) -> String) {
+    public init(_ description: String? = nil, contexts: [Context?]? = nil, contextsNot: [Context?]? = nil, search: Regex<(Substring, Substring, Substring)>, operation: @escaping (String, Regex<(Substring, Substring, Substring)>) -> String) {
         self.description = description
-        self.contexts = contexts
-        self.contextsNot = contextsNot
+        self.contexts = contexts?.compactMap{ $0 }
+        self.contextsNot = contextsNot?.compactMap{ $0 }
         self.search = search
         self.operation = operation
     }
@@ -505,10 +505,10 @@ public struct ReplacementOf4GroupsRegex<Context>: Replacement<Context>, @uncheck
     private let search: Regex<(Substring, Substring, Substring, Substring)>
     private let operation: (String, Regex<(Substring, Substring, Substring, Substring)>) -> String
     
-    public init(_ description: String? = nil, contexts: [Context]? = nil, contextsNot: [Context]? = nil, search: Regex<(Substring, Substring, Substring, Substring)>, operation: @escaping (String, Regex<(Substring, Substring, Substring, Substring)>) -> String) {
+    public init(_ description: String? = nil, contexts: [Context?]? = nil, contextsNot: [Context?]? = nil, search: Regex<(Substring, Substring, Substring, Substring)>, operation: @escaping (String, Regex<(Substring, Substring, Substring, Substring)>) -> String) {
         self.description = description
-        self.contexts = contexts
-        self.contextsNot = contextsNot
+        self.contexts = contexts?.compactMap{ $0 }
+        self.contextsNot = contextsNot?.compactMap{ $0 }
         self.search = search
         self.operation = operation
     }
@@ -537,10 +537,10 @@ public struct ReplacementOf5GroupsRegex<Context>: Replacement<Context>, @uncheck
     private let search: Regex<(Substring, Substring, Substring, Substring, Substring)>
     private let operation: (String, Regex<(Substring, Substring, Substring, Substring, Substring)>) -> String
     
-    public init(_ description: String? = nil, contexts: [Context]? = nil, contextsNot: [Context]? = nil, search: Regex<(Substring, Substring, Substring, Substring, Substring)>, operation: @escaping (String, Regex<(Substring, Substring, Substring, Substring, Substring)>) -> String) {
+    public init(_ description: String? = nil, contexts: [Context?]? = nil, contextsNot: [Context?]? = nil, search: Regex<(Substring, Substring, Substring, Substring, Substring)>, operation: @escaping (String, Regex<(Substring, Substring, Substring, Substring, Substring)>) -> String) {
         self.description = description
-        self.contexts = contexts
-        self.contextsNot = contextsNot
+        self.contexts = contexts?.compactMap{ $0 }
+        self.contextsNot = contextsNot?.compactMap{ $0 }
         self.search = search
         self.operation = operation
     }
@@ -569,10 +569,10 @@ public struct ReplacementOf6GroupsRegex<Context>: Replacement<Context>, @uncheck
     private let search: Regex<(Substring, Substring, Substring, Substring, Substring, Substring)>
     private let operation: (String, Regex<(Substring, Substring, Substring, Substring, Substring, Substring)>) -> String
     
-    public init(_ description: String? = nil, contexts: [Context]? = nil, contextsNot: [Context]? = nil, search: Regex<(Substring, Substring, Substring, Substring, Substring, Substring)>, operation: @escaping (String, Regex<(Substring, Substring, Substring, Substring, Substring, Substring)>) -> String) {
+    public init(_ description: String? = nil, contexts: [Context?]? = nil, contextsNot: [Context?]? = nil, search: Regex<(Substring, Substring, Substring, Substring, Substring, Substring)>, operation: @escaping (String, Regex<(Substring, Substring, Substring, Substring, Substring, Substring)>) -> String) {
         self.description = description
-        self.contexts = contexts
-        self.contextsNot = contextsNot
+        self.contexts = contexts?.compactMap{ $0 }
+        self.contextsNot = contextsNot?.compactMap{ $0 }
         self.search = search
         self.operation = operation
     }
@@ -601,10 +601,10 @@ public struct ReplacementOf7GroupsRegex<Context>: Replacement<Context>, @uncheck
     private let search: Regex<(Substring, Substring, Substring, Substring, Substring, Substring, Substring)>
     private let operation: (String, Regex<(Substring, Substring, Substring, Substring, Substring, Substring, Substring)>) -> String
     
-    public init(_ description: String? = nil, contexts: [Context]? = nil, contextsNot: [Context]? = nil, search: Regex<(Substring, Substring, Substring, Substring, Substring, Substring, Substring)>, operation: @escaping (String, Regex<(Substring, Substring, Substring, Substring, Substring, Substring, Substring)>) -> String) {
+    public init(_ description: String? = nil, contexts: [Context?]? = nil, contextsNot: [Context?]? = nil, search: Regex<(Substring, Substring, Substring, Substring, Substring, Substring, Substring)>, operation: @escaping (String, Regex<(Substring, Substring, Substring, Substring, Substring, Substring, Substring)>) -> String) {
         self.description = description
-        self.contexts = contexts
-        self.contextsNot = contextsNot
+        self.contexts = contexts?.compactMap{ $0 }
+        self.contextsNot = contextsNot?.compactMap{ $0 }
         self.search = search
         self.operation = operation
     }
@@ -633,10 +633,10 @@ public struct ReplacementOf8GroupsRegex<Context>: Replacement<Context>, @uncheck
     private let search: Regex<(Substring, Substring, Substring, Substring, Substring, Substring, Substring, Substring)>
     private let operation: (String, Regex<(Substring, Substring, Substring, Substring, Substring, Substring, Substring, Substring)>) -> String
     
-    public init(_ description: String? = nil, contexts: [Context]? = nil, contextsNot: [Context]? = nil, search: Regex<(Substring, Substring, Substring, Substring, Substring, Substring, Substring, Substring)>, operation: @escaping (String, Regex<(Substring, Substring, Substring, Substring, Substring, Substring, Substring, Substring)>) -> String) {
+    public init(_ description: String? = nil, contexts: [Context?]? = nil, contextsNot: [Context?]? = nil, search: Regex<(Substring, Substring, Substring, Substring, Substring, Substring, Substring, Substring)>, operation: @escaping (String, Regex<(Substring, Substring, Substring, Substring, Substring, Substring, Substring, Substring)>) -> String) {
         self.description = description
-        self.contexts = contexts
-        self.contextsNot = contextsNot
+        self.contexts = contexts?.compactMap{ $0 }
+        self.contextsNot = contextsNot?.compactMap{ $0 }
         self.search = search
         self.operation = operation
     }
@@ -665,10 +665,10 @@ public struct ReplacementOf9GroupsRegex<Context>: Replacement<Context>, @uncheck
     private let search: Regex<(Substring, Substring, Substring, Substring, Substring, Substring, Substring, Substring, Substring)>
     private let operation: (String, Regex<(Substring, Substring, Substring, Substring, Substring, Substring, Substring, Substring, Substring)>) -> String
     
-    public init(_ description: String? = nil, contexts: [Context]? = nil, contextsNot: [Context]? = nil, search: Regex<(Substring, Substring, Substring, Substring, Substring, Substring, Substring, Substring, Substring)>, operation: @escaping (String, Regex<(Substring, Substring, Substring, Substring, Substring, Substring, Substring, Substring, Substring)>) -> String) {
+    public init(_ description: String? = nil, contexts: [Context?]? = nil, contextsNot: [Context?]? = nil, search: Regex<(Substring, Substring, Substring, Substring, Substring, Substring, Substring, Substring, Substring)>, operation: @escaping (String, Regex<(Substring, Substring, Substring, Substring, Substring, Substring, Substring, Substring, Substring)>) -> String) {
         self.description = description
-        self.contexts = contexts
-        self.contextsNot = contextsNot
+        self.contexts = contexts?.compactMap{ $0 }
+        self.contextsNot = contextsNot?.compactMap{ $0 }
         self.search = search
         self.operation = operation
     }
@@ -697,10 +697,10 @@ public struct ReplacementOf10GroupsRegex<Context>: Replacement<Context>, @unchec
     private let search: Regex<(Substring, Substring, Substring, Substring, Substring, Substring, Substring, Substring, Substring, Substring)>
     private let operation: (String, Regex<(Substring, Substring, Substring, Substring, Substring, Substring, Substring, Substring, Substring, Substring)>) -> String
     
-    public init(_ description: String? = nil, contexts: [Context]? = nil, contextsNot: [Context]? = nil, search: Regex<(Substring, Substring, Substring, Substring, Substring, Substring, Substring, Substring, Substring, Substring)>, operation: @escaping (String, Regex<(Substring, Substring, Substring, Substring, Substring, Substring, Substring, Substring, Substring, Substring)>) -> String) {
+    public init(_ description: String? = nil, contexts: [Context?]? = nil, contextsNot: [Context?]? = nil, search: Regex<(Substring, Substring, Substring, Substring, Substring, Substring, Substring, Substring, Substring, Substring)>, operation: @escaping (String, Regex<(Substring, Substring, Substring, Substring, Substring, Substring, Substring, Substring, Substring, Substring)>) -> String) {
         self.description = description
-        self.contexts = contexts
-        self.contextsNot = contextsNot
+        self.contexts = contexts?.compactMap{ $0 }
+        self.contextsNot = contextsNot?.compactMap{ $0 }
         self.search = search
         self.operation = operation
     }
@@ -728,10 +728,10 @@ public struct ReplacementByOperation<Context>: Replacement<Context>, @unchecked 
     
     private let operation: (String) -> String
     
-    public init(_ description: String? = nil, contexts: [Context]? = nil, contextsNot: [Context]? = nil, operation: @escaping (String) -> String) {
+    public init(_ description: String? = nil, contexts: [Context?]? = nil, contextsNot: [Context?]? = nil, operation: @escaping (String) -> String) {
         self.description = description
-        self.contexts = contexts
-        self.contextsNot = contextsNot
+        self.contexts = contexts?.compactMap{ $0 }
+        self.contextsNot = contextsNot?.compactMap{ $0 }
         self.operation = operation
     }
     
