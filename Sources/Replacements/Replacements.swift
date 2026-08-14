@@ -37,6 +37,22 @@ public struct ReplacementOfTextWithText<Context>: Replacement<Context>, @uncheck
         self.replacement = replacement
     }
     
+    public init(_ description: String? = nil, contextLists: [[Context]?]?, contextNotLists: [[Context]?]? = nil, search: String, replacement: String) {
+        self.description = description
+        self.contexts = if let contextLists { Array(contextLists.compactMap{ $0 }.joined()) } else { nil }
+        self.contextsNot = if let contextNotLists { Array(contextNotLists.compactMap{ $0 }.joined()) } else { nil }
+        self.search = search
+        self.replacement = replacement
+    }
+    
+    public init(_ description: String? = nil, contextNotLists: [[Context]?]?, search: String, replacement: String) {
+        self.description = description
+        self.contexts = nil
+        self.contextsNot = if let contextNotLists { Array(contextNotLists.compactMap{ $0 }.joined()) } else { nil }
+        self.search = search
+        self.replacement = replacement
+    }
+    
     public func rewritingContexts<NewContext>(with contextRewriter: any ContextRewriter<Context,NewContext>) throws -> any Replacement<NewContext> {
         ReplacementOfTextWithText<NewContext>(
             description,
@@ -65,6 +81,20 @@ public struct ReplacementOfTextsWithTexts<Context>: Replacement<Context>, @unche
         self.description = description
         self.contexts = contexts?.compactMap{ $0 }
         self.contextsNot = contextsNot?.compactMap{ $0 }
+        self.searchAndReplacement = searchAndReplacement
+    }
+    
+    public init(_ description: String? = nil, contextLists: [[Context]?]?, contextNotLists: [[Context]?]? = nil, searchAndReplacement: [(String,String)]) {
+        self.description = description
+        self.contexts = if let contextLists { Array(contextLists.compactMap{ $0 }.joined()) } else { nil }
+        self.contextsNot = if let contextNotLists { Array(contextNotLists.compactMap{ $0 }.joined()) } else { nil }
+        self.searchAndReplacement = searchAndReplacement
+    }
+    
+    public init(_ description: String? = nil, contextNotLists: [[Context]?]?, searchAndReplacement: [(String,String)]) {
+        self.description = description
+        self.contexts = nil
+        self.contextsNot = if let contextNotLists { Array(contextNotLists.compactMap{ $0 }.joined()) } else { nil }
         self.searchAndReplacement = searchAndReplacement
     }
     
@@ -104,6 +134,22 @@ public struct ReplacementOfRegexWithText<Context>: Replacement<Context>, @unchec
         self.replacement = replacement
     }
     
+    public init(_ description: String? = nil, contextLists: [[Context]?]?, contextNotLists: [[Context]?]? = nil, search: any RegexComponent, replacement: String) {
+        self.description = description
+        self.contexts = if let contextLists { Array(contextLists.compactMap{ $0 }.joined()) } else { nil }
+        self.contextsNot = if let contextNotLists { Array(contextNotLists.compactMap{ $0 }.joined()) } else { nil }
+        self.search = search
+        self.replacement = replacement
+    }
+    
+    public init(_ description: String? = nil, contextNotLists: [[Context]?]?, search: any RegexComponent, replacement: String) {
+        self.description = description
+        self.contexts = nil
+        self.contextsNot = if let contextNotLists { Array(contextNotLists.compactMap{ $0 }.joined()) } else { nil }
+        self.search = search
+        self.replacement = replacement
+    }
+    
     public func rewritingContexts<NewContext>(with contextRewriter: any ContextRewriter<Context,NewContext>) throws -> any Replacement<NewContext> {
         ReplacementOfRegexWithText<NewContext>(
             description,
@@ -133,6 +179,22 @@ public struct ReplacementOfScalarWithScalar<Context>: Replacement<Context>, @unc
         self.description = description
         self.contexts = contexts?.compactMap{ $0 }
         self.contextsNot = contextsNot?.compactMap{ $0 }
+        self.search = search
+        self.replacement = replacement
+    }
+    
+    public init(_ description: String? = nil, contextLists: [[Context]?]?, contextNotLists: [[Context]?]? = nil, search: UnicodeScalar, replacement: UnicodeScalar) {
+        self.description = description
+        self.contexts = if let contextLists { Array(contextLists.compactMap{ $0 }.joined()) } else { nil }
+        self.contextsNot = if let contextNotLists { Array(contextNotLists.compactMap{ $0 }.joined()) } else { nil }
+        self.search = search
+        self.replacement = replacement
+    }
+    
+    public init(_ description: String? = nil, contextNotLists: [[Context]?]?, search: UnicodeScalar, replacement: UnicodeScalar) {
+        self.description = description
+        self.contexts = nil
+        self.contextsNot = if let contextNotLists { Array(contextNotLists.compactMap{ $0 }.joined()) } else { nil }
         self.search = search
         self.replacement = replacement
     }
@@ -175,6 +237,20 @@ public struct ReplacementOfScalarsWithScalars<Context>: Replacement<Context>, @u
         self.map = map
     }
     
+    public init(_ description: String? = nil, contextLists: [[Context]?]?, contextNotLists: [[Context]?]? = nil, _ map: [UnicodeScalar:UnicodeScalar]) {
+        self.description = description
+        self.contexts = if let contextLists { Array(contextLists.compactMap{ $0 }.joined()) } else { nil }
+        self.contextsNot = if let contextNotLists { Array(contextNotLists.compactMap{ $0 }.joined()) } else { nil }
+        self.map = map
+    }
+    
+    public init(_ description: String? = nil, contextNotLists: [[Context]?]?, _ map: [UnicodeScalar:UnicodeScalar]) {
+        self.description = description
+        self.contexts = nil
+        self.contextsNot = if let contextNotLists { Array(contextNotLists.compactMap{ $0 }.joined()) } else { nil }
+        self.map = map
+    }
+    
     public func rewritingContexts<NewContext>(with contextRewriter: any ContextRewriter<Context,NewContext>) throws -> any Replacement<NewContext> {
         ReplacementOfScalarsWithScalars<NewContext>(
             description,
@@ -198,7 +274,7 @@ public struct ReplacementOfScalarsWithTexts<Context>: Replacement<Context>, @unc
     
     let map: [UnicodeScalar:String]
     
-    public init(_ description: String? = nil, contexts: [Context?]? = nil, contextsNot: [Context?]? = nil, _ map: [UnicodeScalar:String]) {
+    public init(_ description: String?, contexts: [Context?]? = nil, contextsNot: [Context?]? = nil, _ map: [UnicodeScalar:String]) {
         self.description = description
         self.contexts = contexts?.compactMap{ $0 }
         self.contextsNot = contextsNot?.compactMap{ $0 }
@@ -209,6 +285,20 @@ public struct ReplacementOfScalarsWithTexts<Context>: Replacement<Context>, @unc
         self.description = nil
         self.contexts = contexts?.compactMap{ $0 }
         self.contextsNot = contextsNot?.compactMap{ $0 }
+        self.map = map
+    }
+    
+    public init(_ description: String? = nil, contextLists: [[Context]?]?, contextNotLists: [[Context]?]? = nil, _ map: [UnicodeScalar:String]) {
+        self.description = description
+        self.contexts = if let contextLists { Array(contextLists.compactMap{ $0 }.joined()) } else { nil }
+        self.contextsNot = if let contextNotLists { Array(contextNotLists.compactMap{ $0 }.joined()) } else { nil }
+        self.map = map
+    }
+    
+    public init(_ description: String? = nil, contextNotLists: [[Context]?]?, _ map: [UnicodeScalar:String]) {
+        self.description = description
+        self.contexts = nil
+        self.contextsNot = if let contextNotLists { Array(contextNotLists.compactMap{ $0 }.joined()) } else { nil }
         self.map = map
     }
     
@@ -240,6 +330,22 @@ public struct ReplacementOfScalarWithText<Context>: Replacement<Context>, @unche
         self.description = description
         self.contexts = contexts?.compactMap{ $0 }
         self.contextsNot = contextsNot?.compactMap{ $0 }
+        self.search = search
+        self.replacement = replacement
+    }
+    
+    public init(_ description: String? = nil, contextLists: [[Context]?]?, contextNotLists: [[Context]?]? = nil, search: UnicodeScalar, replacement: String) {
+        self.description = description
+        self.contexts = if let contextLists { Array(contextLists.compactMap{ $0 }.joined()) } else { nil }
+        self.contextsNot = if let contextNotLists { Array(contextNotLists.compactMap{ $0 }.joined()) } else { nil }
+        self.search = search
+        self.replacement = replacement
+    }
+    
+    public init(_ description: String? = nil, contextNotLists: [[Context]?]?, search: UnicodeScalar, replacement: String) {
+        self.description = description
+        self.contexts = nil
+        self.contextsNot = if let contextNotLists { Array(contextNotLists.compactMap{ $0 }.joined()) } else { nil }
         self.search = search
         self.replacement = replacement
     }
@@ -277,6 +383,22 @@ public struct ReplacementOfCodepointWithCodepoint<Context>: Replacement<Context>
         self.replacement = replacement
     }
     
+    public init(_ description: String? = nil, contextLists: [[Context]?]?, contextNotLists: [[Context]?]? = nil, search: UInt32, replacement: UInt32) {
+        self.description = description
+        self.contexts = if let contextLists { Array(contextLists.compactMap{ $0 }.joined()) } else { nil }
+        self.contextsNot = if let contextNotLists { Array(contextNotLists.compactMap{ $0 }.joined()) } else { nil }
+        self.search = search
+        self.replacement = replacement
+    }
+    
+    public init(_ description: String? = nil, contextNotLists: [[Context]?]?, search: UInt32, replacement: UInt32) {
+        self.description = description
+        self.contexts = nil
+        self.contextsNot = if let contextNotLists { Array(contextNotLists.compactMap{ $0 }.joined()) } else { nil }
+        self.search = search
+        self.replacement = replacement
+    }
+    
     public func rewritingContexts<NewContext>(with contextRewriter: any ContextRewriter<Context,NewContext>) throws -> any Replacement<NewContext> {
         ReplacementOfCodepointWithCodepoint<NewContext>(
             description,
@@ -310,6 +432,22 @@ public struct ReplacementOfCodepointWithText<Context>: Replacement<Context>, @un
         self.replacement = replacement
     }
     
+    public init(_ description: String? = nil, contextLists: [[Context]?]?, contextNotLists: [[Context]?]? = nil, search: UInt32, replacement: String) {
+        self.description = description
+        self.contexts = if let contextLists { Array(contextLists.compactMap{ $0 }.joined()) } else { nil }
+        self.contextsNot = if let contextNotLists { Array(contextNotLists.compactMap{ $0 }.joined()) } else { nil }
+        self.search = search
+        self.replacement = replacement
+    }
+    
+    public init(_ description: String? = nil, contextNotLists: [[Context]?]?, search: UInt32, replacement: String) {
+        self.description = description
+        self.contexts = nil
+        self.contextsNot = if let contextNotLists { Array(contextNotLists.compactMap{ $0 }.joined()) } else { nil }
+        self.search = search
+        self.replacement = replacement
+    }
+    
     public func rewritingContexts<NewContext>(with contextRewriter: any ContextRewriter<Context,NewContext>) throws -> any Replacement<NewContext> {
         ReplacementOfCodepointWithText<NewContext>(
             description,
@@ -334,7 +472,7 @@ public struct ReplacementOfCodepointsWithCodepoints<Context>: Replacement<Contex
     
     let map: [UInt32:UInt32]
     
-    public init(_ description: String? = nil, contexts: [Context?]? = nil, contextsNot: [Context?]? = nil, _ map: [UInt32:UInt32]) {
+    public init(_ description: String?, contexts: [Context?]? = nil, contextsNot: [Context?]? = nil, _ map: [UInt32:UInt32]) {
         self.description = description
         self.contexts = contexts?.compactMap{ $0 }
         self.contextsNot = contextsNot?.compactMap{ $0 }
@@ -345,6 +483,20 @@ public struct ReplacementOfCodepointsWithCodepoints<Context>: Replacement<Contex
         self.description = nil
         self.contexts = contexts?.compactMap{ $0 }
         self.contextsNot = contextsNot?.compactMap{ $0 }
+        self.map = map
+    }
+    
+    public init(_ description: String? = nil, contextLists: [[Context]?]?, contextNotLists: [[Context]?]? = nil, _ map: [UInt32:UInt32]) {
+        self.description = description
+        self.contexts = if let contextLists { Array(contextLists.compactMap{ $0 }.joined()) } else { nil }
+        self.contextsNot = if let contextNotLists { Array(contextNotLists.compactMap{ $0 }.joined()) } else { nil }
+        self.map = map
+    }
+    
+    public init(_ description: String? = nil, contextNotLists: [[Context]?]?, _ map: [UInt32:UInt32]) {
+        self.description = description
+        self.contexts = nil
+        self.contextsNot = if let contextNotLists { Array(contextNotLists.compactMap{ $0 }.joined()) } else { nil }
         self.map = map
     }
     
@@ -371,7 +523,7 @@ public struct ReplacementOfCodepointsWithTexts<Context>: Replacement<Context>, @
     
     let map: [UInt32:String]
     
-    public init(_ description: String? = nil, contexts: [Context?]? = nil, contextsNot: [Context?]? = nil, _ map: [UInt32:String]) {
+    public init(_ description: String?, contexts: [Context?]? = nil, contextsNot: [Context?]? = nil, _ map: [UInt32:String]) {
         self.description = description
         self.contexts = contexts?.compactMap{ $0 }
         self.contextsNot = contextsNot?.compactMap{ $0 }
@@ -382,6 +534,20 @@ public struct ReplacementOfCodepointsWithTexts<Context>: Replacement<Context>, @
         self.description = nil
         self.contexts = contexts?.compactMap{ $0 }
         self.contextsNot = contextsNot?.compactMap{ $0 }
+        self.map = map
+    }
+    
+    public init(_ description: String? = nil, contextLists: [[Context]?]?, contextNotLists: [[Context]?]? = nil, _ map: [UInt32:String]) {
+        self.description = description
+        self.contexts = if let contextLists { Array(contextLists.compactMap{ $0 }.joined()) } else { nil }
+        self.contextsNot = if let contextNotLists { Array(contextNotLists.compactMap{ $0 }.joined()) } else { nil }
+        self.map = map
+    }
+    
+    public init(_ description: String? = nil, contextNotLists: [[Context]?]?, _ map: [UInt32:String]) {
+        self.description = description
+        self.contexts = nil
+        self.contextsNot = if let contextNotLists { Array(contextNotLists.compactMap{ $0 }.joined()) } else { nil }
         self.map = map
     }
     
@@ -413,6 +579,22 @@ public struct ReplacementOf1GroupRegex<Context>: Replacement<Context>, @unchecke
         self.description = description
         self.contexts = contexts?.compactMap{ $0 }
         self.contextsNot = contextsNot?.compactMap{ $0 }
+        self.search = search
+        self.operation = operation
+    }
+    
+    public init(_ description: String? = nil, contextLists: [[Context]?]?, contextNotLists: [[Context]?]? = nil, search: Regex<(Substring)>, operation: @escaping (String, Regex<(Substring)>) -> String) {
+        self.description = description
+        self.contexts = if let contextLists { Array(contextLists.compactMap{ $0 }.joined()) } else { nil }
+        self.contextsNot = if let contextNotLists { Array(contextNotLists.compactMap{ $0 }.joined()) } else { nil }
+        self.search = search
+        self.operation = operation
+    }
+    
+    public init(_ description: String? = nil, contextNotLists: [[Context]?]?, search: Regex<(Substring)>, operation: @escaping (String, Regex<(Substring)>) -> String) {
+        self.description = description
+        self.contexts = nil
+        self.contextsNot = if let contextNotLists { Array(contextNotLists.compactMap{ $0 }.joined()) } else { nil }
         self.search = search
         self.operation = operation
     }
@@ -449,6 +631,22 @@ public struct ReplacementOf2GroupsRegex<Context>: Replacement<Context>, @uncheck
         self.operation = operation
     }
     
+    public init(_ description: String? = nil, contextLists: [[Context]?]?, contextNotLists: [[Context]?]? = nil, search: Regex<(Substring, Substring)>, operation: @escaping (String, Regex<(Substring, Substring)>) -> String) {
+        self.description = description
+        self.contexts = if let contextLists { Array(contextLists.compactMap{ $0 }.joined()) } else { nil }
+        self.contextsNot = if let contextNotLists { Array(contextNotLists.compactMap{ $0 }.joined()) } else { nil }
+        self.search = search
+        self.operation = operation
+    }
+    
+    public init(_ description: String? = nil, contextNotLists: [[Context]?]? , search: Regex<(Substring, Substring)>, operation: @escaping (String, Regex<(Substring, Substring)>) -> String) {
+        self.description = description
+        self.contexts = nil
+        self.contextsNot = if let contextNotLists { Array(contextNotLists.compactMap{ $0 }.joined()) } else { nil }
+        self.search = search
+        self.operation = operation
+    }
+    
     public func rewritingContexts<NewContext>(with contextRewriter: any ContextRewriter<Context,NewContext>) throws -> any Replacement<NewContext> {
         ReplacementOf2GroupsRegex<NewContext>(
             description,
@@ -477,6 +675,22 @@ public struct ReplacementOf3GroupsRegex<Context>: Replacement<Context>, @uncheck
         self.description = description
         self.contexts = contexts?.compactMap{ $0 }
         self.contextsNot = contextsNot?.compactMap{ $0 }
+        self.search = search
+        self.operation = operation
+    }
+    
+    public init(_ description: String? = nil, contextLists: [[Context]?]?, contextNotLists: [[Context]?]? = nil, search: Regex<(Substring, Substring, Substring)>, operation: @escaping (String, Regex<(Substring, Substring, Substring)>) -> String) {
+        self.description = description
+        self.contexts = if let contextLists { Array(contextLists.compactMap{ $0 }.joined()) } else { nil }
+        self.contextsNot = if let contextNotLists { Array(contextNotLists.compactMap{ $0 }.joined()) } else { nil }
+        self.search = search
+        self.operation = operation
+    }
+    
+    public init(_ description: String? = nil, contextNotLists: [[Context]?]?, search: Regex<(Substring, Substring, Substring)>, operation: @escaping (String, Regex<(Substring, Substring, Substring)>) -> String) {
+        self.description = description
+        self.contexts = nil
+        self.contextsNot = if let contextNotLists { Array(contextNotLists.compactMap{ $0 }.joined()) } else { nil }
         self.search = search
         self.operation = operation
     }
@@ -513,6 +727,22 @@ public struct ReplacementOf4GroupsRegex<Context>: Replacement<Context>, @uncheck
         self.operation = operation
     }
     
+    public init(_ description: String? = nil, contextLists: [[Context]?]?, contextNotLists: [[Context]?]? = nil, search: Regex<(Substring, Substring, Substring, Substring)>, operation: @escaping (String, Regex<(Substring, Substring, Substring, Substring)>) -> String) {
+        self.description = description
+        self.contexts = if let contextLists { Array(contextLists.compactMap{ $0 }.joined()) } else { nil }
+        self.contextsNot = if let contextNotLists { Array(contextNotLists.compactMap{ $0 }.joined()) } else { nil }
+        self.search = search
+        self.operation = operation
+    }
+    
+    public init(_ description: String? = nil, contextNotLists: [[Context]?]?, search: Regex<(Substring, Substring, Substring, Substring)>, operation: @escaping (String, Regex<(Substring, Substring, Substring, Substring)>) -> String) {
+        self.description = description
+        self.contexts = nil
+        self.contextsNot = if let contextNotLists { Array(contextNotLists.compactMap{ $0 }.joined()) } else { nil }
+        self.search = search
+        self.operation = operation
+    }
+    
     public func rewritingContexts<NewContext>(with contextRewriter: any ContextRewriter<Context,NewContext>) throws -> any Replacement<NewContext> {
         ReplacementOf4GroupsRegex<NewContext>(
             description,
@@ -541,6 +771,22 @@ public struct ReplacementOf5GroupsRegex<Context>: Replacement<Context>, @uncheck
         self.description = description
         self.contexts = contexts?.compactMap{ $0 }
         self.contextsNot = contextsNot?.compactMap{ $0 }
+        self.search = search
+        self.operation = operation
+    }
+    
+    public init(_ description: String? = nil, contextLists: [[Context]?]?, contextNotLists: [[Context]?]? = nil, search: Regex<(Substring, Substring, Substring, Substring, Substring)>, operation: @escaping (String, Regex<(Substring, Substring, Substring, Substring, Substring)>) -> String) {
+        self.description = description
+        self.contexts = if let contextLists { Array(contextLists.compactMap{ $0 }.joined()) } else { nil }
+        self.contextsNot = if let contextNotLists { Array(contextNotLists.compactMap{ $0 }.joined()) } else { nil }
+        self.search = search
+        self.operation = operation
+    }
+    
+    public init(_ description: String? = nil, contextNotLists: [[Context]?]?, search: Regex<(Substring, Substring, Substring, Substring, Substring)>, operation: @escaping (String, Regex<(Substring, Substring, Substring, Substring, Substring)>) -> String) {
+        self.description = description
+        self.contexts = nil
+        self.contextsNot = if let contextNotLists { Array(contextNotLists.compactMap{ $0 }.joined()) } else { nil }
         self.search = search
         self.operation = operation
     }
@@ -577,6 +823,22 @@ public struct ReplacementOf6GroupsRegex<Context>: Replacement<Context>, @uncheck
         self.operation = operation
     }
     
+    public init(_ description: String? = nil, contextLists: [[Context]?]?, contextNotLists: [[Context]?]? = nil, search: Regex<(Substring, Substring, Substring, Substring, Substring, Substring)>, operation: @escaping (String, Regex<(Substring, Substring, Substring, Substring, Substring, Substring)>) -> String) {
+        self.description = description
+        self.contexts = if let contextLists { Array(contextLists.compactMap{ $0 }.joined()) } else { nil }
+        self.contextsNot = if let contextNotLists { Array(contextNotLists.compactMap{ $0 }.joined()) } else { nil }
+        self.search = search
+        self.operation = operation
+    }
+    
+    public init(_ description: String? = nil, contextNotLists: [[Context]?]?, search: Regex<(Substring, Substring, Substring, Substring, Substring, Substring)>, operation: @escaping (String, Regex<(Substring, Substring, Substring, Substring, Substring, Substring)>) -> String) {
+        self.description = description
+        self.contexts = nil
+        self.contextsNot = if let contextNotLists { Array(contextNotLists.compactMap{ $0 }.joined()) } else { nil }
+        self.search = search
+        self.operation = operation
+    }
+    
     public func rewritingContexts<NewContext>(with contextRewriter: any ContextRewriter<Context,NewContext>) throws -> any Replacement<NewContext> {
         ReplacementOf6GroupsRegex<NewContext>(
             description,
@@ -605,6 +867,22 @@ public struct ReplacementOf7GroupsRegex<Context>: Replacement<Context>, @uncheck
         self.description = description
         self.contexts = contexts?.compactMap{ $0 }
         self.contextsNot = contextsNot?.compactMap{ $0 }
+        self.search = search
+        self.operation = operation
+    }
+    
+    public init(_ description: String? = nil, contextLists: [[Context]?]?, contextNotLists: [[Context]?]? = nil, search: Regex<(Substring, Substring, Substring, Substring, Substring, Substring, Substring)>, operation: @escaping (String, Regex<(Substring, Substring, Substring, Substring, Substring, Substring, Substring)>) -> String) {
+        self.description = description
+        self.contexts = if let contextLists { Array(contextLists.compactMap{ $0 }.joined()) } else { nil }
+        self.contextsNot = if let contextNotLists { Array(contextNotLists.compactMap{ $0 }.joined()) } else { nil }
+        self.search = search
+        self.operation = operation
+    }
+    
+    public init(_ description: String? = nil, contextNotLists: [[Context]?]?, search: Regex<(Substring, Substring, Substring, Substring, Substring, Substring, Substring)>, operation: @escaping (String, Regex<(Substring, Substring, Substring, Substring, Substring, Substring, Substring)>) -> String) {
+        self.description = description
+        self.contexts = nil
+        self.contextsNot = if let contextNotLists { Array(contextNotLists.compactMap{ $0 }.joined()) } else { nil }
         self.search = search
         self.operation = operation
     }
@@ -641,6 +919,22 @@ public struct ReplacementOf8GroupsRegex<Context>: Replacement<Context>, @uncheck
         self.operation = operation
     }
     
+    public init(_ description: String? = nil, contextLists: [[Context]?]?, contextNotLists: [[Context]?]? = nil, search: Regex<(Substring, Substring, Substring, Substring, Substring, Substring, Substring, Substring)>, operation: @escaping (String, Regex<(Substring, Substring, Substring, Substring, Substring, Substring, Substring, Substring)>) -> String) {
+        self.description = description
+        self.contexts = if let contextLists { Array(contextLists.compactMap{ $0 }.joined()) } else { nil }
+        self.contextsNot = if let contextNotLists { Array(contextNotLists.compactMap{ $0 }.joined()) } else { nil }
+        self.search = search
+        self.operation = operation
+    }
+    
+    public init(_ description: String? = nil, contextNotLists: [[Context]?]?, search: Regex<(Substring, Substring, Substring, Substring, Substring, Substring, Substring, Substring)>, operation: @escaping (String, Regex<(Substring, Substring, Substring, Substring, Substring, Substring, Substring, Substring)>) -> String) {
+        self.description = description
+        self.contexts = nil
+        self.contextsNot = if let contextNotLists { Array(contextNotLists.compactMap{ $0 }.joined()) } else { nil }
+        self.search = search
+        self.operation = operation
+    }
+    
     public func rewritingContexts<NewContext>(with contextRewriter: any ContextRewriter<Context,NewContext>) throws -> any Replacement<NewContext> {
         ReplacementOf8GroupsRegex<NewContext>(
             description,
@@ -669,6 +963,22 @@ public struct ReplacementOf9GroupsRegex<Context>: Replacement<Context>, @uncheck
         self.description = description
         self.contexts = contexts?.compactMap{ $0 }
         self.contextsNot = contextsNot?.compactMap{ $0 }
+        self.search = search
+        self.operation = operation
+    }
+    
+    public init(_ description: String? = nil, contextLists: [[Context]?]?, contextNotLists: [[Context]?]? = nil, search: Regex<(Substring, Substring, Substring, Substring, Substring, Substring, Substring, Substring, Substring)>, operation: @escaping (String, Regex<(Substring, Substring, Substring, Substring, Substring, Substring, Substring, Substring, Substring)>) -> String) {
+        self.description = description
+        self.contexts = if let contextLists { Array(contextLists.compactMap{ $0 }.joined()) } else { nil }
+        self.contextsNot = if let contextNotLists { Array(contextNotLists.compactMap{ $0 }.joined()) } else { nil }
+        self.search = search
+        self.operation = operation
+    }
+    
+    public init(_ description: String? = nil,contextNotLists: [[Context]?]?, search: Regex<(Substring, Substring, Substring, Substring, Substring, Substring, Substring, Substring, Substring)>, operation: @escaping (String, Regex<(Substring, Substring, Substring, Substring, Substring, Substring, Substring, Substring, Substring)>) -> String) {
+        self.description = description
+        self.contexts = nil
+        self.contextsNot = if let contextNotLists { Array(contextNotLists.compactMap{ $0 }.joined()) } else { nil }
         self.search = search
         self.operation = operation
     }
@@ -705,6 +1015,22 @@ public struct ReplacementOf10GroupsRegex<Context>: Replacement<Context>, @unchec
         self.operation = operation
     }
     
+    public init(_ description: String? = nil, contextLists: [[Context]?]?, contextNotLists: [[Context]?]? = nil, search: Regex<(Substring, Substring, Substring, Substring, Substring, Substring, Substring, Substring, Substring, Substring)>, operation: @escaping (String, Regex<(Substring, Substring, Substring, Substring, Substring, Substring, Substring, Substring, Substring, Substring)>) -> String) {
+        self.description = description
+        self.contexts = if let contextLists { Array(contextLists.compactMap{ $0 }.joined()) } else { nil }
+        self.contextsNot = if let contextNotLists { Array(contextNotLists.compactMap{ $0 }.joined()) } else { nil }
+        self.search = search
+        self.operation = operation
+    }
+    
+    public init(_ description: String? = nil, contextNotLists: [[Context]?]?, search: Regex<(Substring, Substring, Substring, Substring, Substring, Substring, Substring, Substring, Substring, Substring)>, operation: @escaping (String, Regex<(Substring, Substring, Substring, Substring, Substring, Substring, Substring, Substring, Substring, Substring)>) -> String) {
+        self.description = description
+        self.contexts = nil
+        self.contextsNot = if let contextNotLists { Array(contextNotLists.compactMap{ $0 }.joined()) } else { nil }
+        self.search = search
+        self.operation = operation
+    }
+    
     public func rewritingContexts<NewContext>(with contextRewriter: any ContextRewriter<Context,NewContext>) throws -> any Replacement<NewContext> {
         ReplacementOf10GroupsRegex<NewContext>(
             description,
@@ -732,6 +1058,20 @@ public struct ReplacementByOperation<Context>: Replacement<Context>, @unchecked 
         self.description = description
         self.contexts = contexts?.compactMap{ $0 }
         self.contextsNot = contextsNot?.compactMap{ $0 }
+        self.operation = operation
+    }
+    
+    public init(_ description: String? = nil, contextLists: [[Context]?]?, contextNotLists: [[Context]?]? = nil, operation: @escaping (String) -> String) {
+        self.description = description
+        self.contexts = if let contextLists { Array(contextLists.compactMap{ $0 }.joined()) } else { nil }
+        self.contextsNot = if let contextNotLists { Array(contextNotLists.compactMap{ $0 }.joined()) } else { nil }
+        self.operation = operation
+    }
+    
+    public init(_ description: String? = nil, contextNotLists: [[Context]?]?, operation: @escaping (String) -> String) {
+        self.description = description
+        self.contexts = nil
+        self.contextsNot = if let contextNotLists { Array(contextNotLists.compactMap{ $0 }.joined()) } else { nil }
         self.operation = operation
     }
     
