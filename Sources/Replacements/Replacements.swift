@@ -2,12 +2,12 @@ import FastReplace
 
 public protocol Replacement<Context>: Sendable {
     
-    associatedtype Context: CustomStringConvertible
+    associatedtype Context
     
     var description: String? { get }
     var contexts: [Context]? { get }
     var contextsNot: [Context]? { get }
-    func rewritingContexts<NewContext: CustomStringConvertible>(with contextRewriter: any ContextRewriter<Context,NewContext>) throws -> any Replacement<NewContext>
+    func rewritingContexts<NewContext>(with contextRewriter: any ContextRewriter<Context,NewContext>) throws -> any Replacement<NewContext>
     func replacing(in text: String) -> String
 }
 
@@ -20,7 +20,7 @@ public protocol ContextRewriter<Context,NewContext> {
     
 }
 
-public struct ReplacementOfTextWithText<Context: CustomStringConvertible>: Replacement<Context>, @unchecked Sendable {
+public struct ReplacementOfTextWithText<Context>: Replacement<Context>, @unchecked Sendable {
     
     public let description: String?
     public let contexts: [Context]?
@@ -53,7 +53,7 @@ public struct ReplacementOfTextWithText<Context: CustomStringConvertible>: Repla
         self.replacement = replacement
     }
     
-    public func rewritingContexts<NewContext: CustomStringConvertible>(with contextRewriter: any ContextRewriter<Context,NewContext>) throws -> any Replacement<NewContext> {
+    public func rewritingContexts<NewContext>(with contextRewriter: any ContextRewriter<Context,NewContext>) throws -> any Replacement<NewContext> {
         ReplacementOfTextWithText<NewContext>(
             description,
             contexts: try contexts?.map{ try contextRewriter.rewrite($0) },
@@ -69,7 +69,7 @@ public struct ReplacementOfTextWithText<Context: CustomStringConvertible>: Repla
     
 }
 
-public struct ReplacementOfTextsWithTexts<Context: CustomStringConvertible>: Replacement<Context>, @unchecked Sendable {
+public struct ReplacementOfTextsWithTexts<Context>: Replacement<Context>, @unchecked Sendable {
     
     public let description: String?
     public let contexts: [Context]?
@@ -98,7 +98,7 @@ public struct ReplacementOfTextsWithTexts<Context: CustomStringConvertible>: Rep
         self.searchAndReplacement = searchAndReplacement
     }
     
-    public func rewritingContexts<NewContext: CustomStringConvertible>(with contextRewriter: any ContextRewriter<Context,NewContext>) throws -> any Replacement<NewContext> {
+    public func rewritingContexts<NewContext>(with contextRewriter: any ContextRewriter<Context,NewContext>) throws -> any Replacement<NewContext> {
         ReplacementOfTextsWithTexts<NewContext>(
             description,
             contexts: try contexts?.map{ try contextRewriter.rewrite($0) },
@@ -117,7 +117,7 @@ public struct ReplacementOfTextsWithTexts<Context: CustomStringConvertible>: Rep
     
 }
 
-public struct ReplacementOfRegexWithText<Context: CustomStringConvertible>: Replacement<Context>, @unchecked Sendable {
+public struct ReplacementOfRegexWithText<Context>: Replacement<Context>, @unchecked Sendable {
     
     public let description: String?
     public let contexts: [Context]?
@@ -150,7 +150,7 @@ public struct ReplacementOfRegexWithText<Context: CustomStringConvertible>: Repl
         self.replacement = replacement
     }
     
-    public func rewritingContexts<NewContext: CustomStringConvertible>(with contextRewriter: any ContextRewriter<Context,NewContext>) throws -> any Replacement<NewContext> {
+    public func rewritingContexts<NewContext>(with contextRewriter: any ContextRewriter<Context,NewContext>) throws -> any Replacement<NewContext> {
         ReplacementOfRegexWithText<NewContext>(
             description,
             contexts: try contexts?.map{ try contextRewriter.rewrite($0) },
@@ -166,7 +166,7 @@ public struct ReplacementOfRegexWithText<Context: CustomStringConvertible>: Repl
     
 }
 
-public struct ReplacementOfScalarWithScalar<Context: CustomStringConvertible>: Replacement<Context>, @unchecked Sendable {
+public struct ReplacementOfScalarWithScalar<Context>: Replacement<Context>, @unchecked Sendable {
     
     public let description: String?
     public let contexts: [Context]?
@@ -199,7 +199,7 @@ public struct ReplacementOfScalarWithScalar<Context: CustomStringConvertible>: R
         self.replacement = replacement
     }
     
-    public func rewritingContexts<NewContext: CustomStringConvertible>(with contextRewriter: any ContextRewriter<Context,NewContext>) throws -> any Replacement<NewContext> {
+    public func rewritingContexts<NewContext>(with contextRewriter: any ContextRewriter<Context,NewContext>) throws -> any Replacement<NewContext> {
         ReplacementOfScalarWithScalar<NewContext>(
             description,
             contexts: try contexts?.map{ try contextRewriter.rewrite($0) },
@@ -215,7 +215,7 @@ public struct ReplacementOfScalarWithScalar<Context: CustomStringConvertible>: R
     
 }
 
-public struct ReplacementOfScalarsWithScalars<Context: CustomStringConvertible>: Replacement<Context>, @unchecked Sendable {
+public struct ReplacementOfScalarsWithScalars<Context>: Replacement<Context>, @unchecked Sendable {
     
     public let description: String?
     public let contexts: [Context]?
@@ -251,7 +251,7 @@ public struct ReplacementOfScalarsWithScalars<Context: CustomStringConvertible>:
         self.map = map
     }
     
-    public func rewritingContexts<NewContext: CustomStringConvertible>(with contextRewriter: any ContextRewriter<Context,NewContext>) throws -> any Replacement<NewContext> {
+    public func rewritingContexts<NewContext>(with contextRewriter: any ContextRewriter<Context,NewContext>) throws -> any Replacement<NewContext> {
         ReplacementOfScalarsWithScalars<NewContext>(
             description,
             contexts: try contexts?.map{ try contextRewriter.rewrite($0) },
@@ -266,7 +266,7 @@ public struct ReplacementOfScalarsWithScalars<Context: CustomStringConvertible>:
     
 }
 
-public struct ReplacementOfScalarsWithTexts<Context: CustomStringConvertible>: Replacement<Context>, @unchecked Sendable {
+public struct ReplacementOfScalarsWithTexts<Context>: Replacement<Context>, @unchecked Sendable {
     
     public let description: String?
     public let contexts: [Context]?
@@ -302,7 +302,7 @@ public struct ReplacementOfScalarsWithTexts<Context: CustomStringConvertible>: R
         self.map = map
     }
     
-    public func rewritingContexts<NewContext: CustomStringConvertible>(with contextRewriter: any ContextRewriter<Context,NewContext>) throws -> any Replacement<NewContext> {
+    public func rewritingContexts<NewContext>(with contextRewriter: any ContextRewriter<Context,NewContext>) throws -> any Replacement<NewContext> {
         ReplacementOfScalarsWithTexts<NewContext>(
             description,
             contexts: try contexts?.map{ try contextRewriter.rewrite($0) },
@@ -317,7 +317,7 @@ public struct ReplacementOfScalarsWithTexts<Context: CustomStringConvertible>: R
     
 }
 
-public struct ReplacementOfScalarWithText<Context: CustomStringConvertible>: Replacement<Context>, @unchecked Sendable {
+public struct ReplacementOfScalarWithText<Context>: Replacement<Context>, @unchecked Sendable {
     
     public let description: String?
     public let contexts: [Context]?
@@ -350,7 +350,7 @@ public struct ReplacementOfScalarWithText<Context: CustomStringConvertible>: Rep
         self.replacement = replacement
     }
     
-    public func rewritingContexts<NewContext: CustomStringConvertible>(with contextRewriter: any ContextRewriter<Context,NewContext>) throws -> any Replacement<NewContext> {
+    public func rewritingContexts<NewContext>(with contextRewriter: any ContextRewriter<Context,NewContext>) throws -> any Replacement<NewContext> {
         ReplacementOfScalarWithText<NewContext>(
             description,
             contexts: try contexts?.map{ try contextRewriter.rewrite($0) },
@@ -366,7 +366,7 @@ public struct ReplacementOfScalarWithText<Context: CustomStringConvertible>: Rep
     
 }
 
-public struct ReplacementOfCodepointWithCodepoint<Context: CustomStringConvertible>: Replacement<Context>, @unchecked Sendable {
+public struct ReplacementOfCodepointWithCodepoint<Context>: Replacement<Context>, @unchecked Sendable {
     
     public let description: String?
     public let contexts: [Context]?
@@ -399,7 +399,7 @@ public struct ReplacementOfCodepointWithCodepoint<Context: CustomStringConvertib
         self.replacement = replacement
     }
     
-    public func rewritingContexts<NewContext: CustomStringConvertible>(with contextRewriter: any ContextRewriter<Context,NewContext>) throws -> any Replacement<NewContext> {
+    public func rewritingContexts<NewContext>(with contextRewriter: any ContextRewriter<Context,NewContext>) throws -> any Replacement<NewContext> {
         ReplacementOfCodepointWithCodepoint<NewContext>(
             description,
             contexts: try contexts?.map{ try contextRewriter.rewrite($0) },
@@ -415,7 +415,7 @@ public struct ReplacementOfCodepointWithCodepoint<Context: CustomStringConvertib
     
 }
 
-public struct ReplacementOfCodepointWithText<Context: CustomStringConvertible>: Replacement<Context>, @unchecked Sendable {
+public struct ReplacementOfCodepointWithText<Context>: Replacement<Context>, @unchecked Sendable {
     
     public let description: String?
     public let contexts: [Context]?
@@ -448,7 +448,7 @@ public struct ReplacementOfCodepointWithText<Context: CustomStringConvertible>: 
         self.replacement = replacement
     }
     
-    public func rewritingContexts<NewContext: CustomStringConvertible>(with contextRewriter: any ContextRewriter<Context,NewContext>) throws -> any Replacement<NewContext> {
+    public func rewritingContexts<NewContext>(with contextRewriter: any ContextRewriter<Context,NewContext>) throws -> any Replacement<NewContext> {
         ReplacementOfCodepointWithText<NewContext>(
             description,
             contexts: try contexts?.map{ try contextRewriter.rewrite($0) },
@@ -464,7 +464,7 @@ public struct ReplacementOfCodepointWithText<Context: CustomStringConvertible>: 
     
 }
 
-public struct ReplacementOfCodepointsWithCodepoints<Context: CustomStringConvertible>: Replacement<Context>, @unchecked Sendable {
+public struct ReplacementOfCodepointsWithCodepoints<Context>: Replacement<Context>, @unchecked Sendable {
     
     public let description: String?
     public let contexts: [Context]?
@@ -500,7 +500,7 @@ public struct ReplacementOfCodepointsWithCodepoints<Context: CustomStringConvert
         self.map = map
     }
     
-    public func rewritingContexts<NewContext: CustomStringConvertible>(with contextRewriter: any ContextRewriter<Context,NewContext>) throws -> any Replacement<NewContext> {
+    public func rewritingContexts<NewContext>(with contextRewriter: any ContextRewriter<Context,NewContext>) throws -> any Replacement<NewContext> {
         ReplacementOfCodepointsWithCodepoints<NewContext>(
             description,
             contexts: try contexts?.map{ try contextRewriter.rewrite($0) },
@@ -515,7 +515,7 @@ public struct ReplacementOfCodepointsWithCodepoints<Context: CustomStringConvert
     
 }
 
-public struct ReplacementOfCodepointsWithTexts<Context: CustomStringConvertible>: Replacement<Context>, @unchecked Sendable {
+public struct ReplacementOfCodepointsWithTexts<Context>: Replacement<Context>, @unchecked Sendable {
     
     public let description: String?
     public let contexts: [Context]?
@@ -551,7 +551,7 @@ public struct ReplacementOfCodepointsWithTexts<Context: CustomStringConvertible>
         self.map = map
     }
     
-    public func rewritingContexts<NewContext: CustomStringConvertible>(with contextRewriter: any ContextRewriter<Context,NewContext>) throws -> any Replacement<NewContext> {
+    public func rewritingContexts<NewContext>(with contextRewriter: any ContextRewriter<Context,NewContext>) throws -> any Replacement<NewContext> {
         ReplacementOfCodepointsWithTexts<NewContext>(
             description,
             contexts: try contexts?.map{ try contextRewriter.rewrite($0) },
@@ -566,7 +566,7 @@ public struct ReplacementOfCodepointsWithTexts<Context: CustomStringConvertible>
     
 }
 
-public struct ReplacementOf1GroupRegex<Context: CustomStringConvertible>: Replacement<Context>, @unchecked Sendable {
+public struct ReplacementOf1GroupRegex<Context>: Replacement<Context>, @unchecked Sendable {
     
     public let description: String?
     public let contexts: [Context]?
@@ -599,7 +599,7 @@ public struct ReplacementOf1GroupRegex<Context: CustomStringConvertible>: Replac
         self.operation = operation
     }
     
-    public func rewritingContexts<NewContext: CustomStringConvertible>(with contextRewriter: any ContextRewriter<Context,NewContext>) throws -> any Replacement<NewContext> {
+    public func rewritingContexts<NewContext>(with contextRewriter: any ContextRewriter<Context,NewContext>) throws -> any Replacement<NewContext> {
         ReplacementOf1GroupRegex<NewContext>(
             description,
             contexts: try contexts?.map{ try contextRewriter.rewrite($0) },
@@ -614,7 +614,7 @@ public struct ReplacementOf1GroupRegex<Context: CustomStringConvertible>: Replac
     }
 }
 
-public struct ReplacementOf2GroupsRegex<Context: CustomStringConvertible>: Replacement<Context>, @unchecked Sendable {
+public struct ReplacementOf2GroupsRegex<Context>: Replacement<Context>, @unchecked Sendable {
     
     public let description: String?
     public let contexts: [Context]?
@@ -647,7 +647,7 @@ public struct ReplacementOf2GroupsRegex<Context: CustomStringConvertible>: Repla
         self.operation = operation
     }
     
-    public func rewritingContexts<NewContext: CustomStringConvertible>(with contextRewriter: any ContextRewriter<Context,NewContext>) throws -> any Replacement<NewContext> {
+    public func rewritingContexts<NewContext>(with contextRewriter: any ContextRewriter<Context,NewContext>) throws -> any Replacement<NewContext> {
         ReplacementOf2GroupsRegex<NewContext>(
             description,
             contexts: try contexts?.map{ try contextRewriter.rewrite($0) },
@@ -662,7 +662,7 @@ public struct ReplacementOf2GroupsRegex<Context: CustomStringConvertible>: Repla
     }
 }
 
-public struct ReplacementOf3GroupsRegex<Context: CustomStringConvertible>: Replacement<Context>, @unchecked Sendable {
+public struct ReplacementOf3GroupsRegex<Context>: Replacement<Context>, @unchecked Sendable {
     
     public let description: String?
     public let contexts: [Context]?
@@ -695,7 +695,7 @@ public struct ReplacementOf3GroupsRegex<Context: CustomStringConvertible>: Repla
         self.operation = operation
     }
     
-    public func rewritingContexts<NewContext: CustomStringConvertible>(with contextRewriter: any ContextRewriter<Context,NewContext>) throws -> any Replacement<NewContext> {
+    public func rewritingContexts<NewContext>(with contextRewriter: any ContextRewriter<Context,NewContext>) throws -> any Replacement<NewContext> {
         ReplacementOf3GroupsRegex<NewContext>(
             description,
             contexts: try contexts?.map{ try contextRewriter.rewrite($0) },
@@ -710,7 +710,7 @@ public struct ReplacementOf3GroupsRegex<Context: CustomStringConvertible>: Repla
     }
 }
 
-public struct ReplacementOf4GroupsRegex<Context: CustomStringConvertible>: Replacement<Context>, @unchecked Sendable {
+public struct ReplacementOf4GroupsRegex<Context>: Replacement<Context>, @unchecked Sendable {
     
     public let description: String?
     public let contexts: [Context]?
@@ -743,7 +743,7 @@ public struct ReplacementOf4GroupsRegex<Context: CustomStringConvertible>: Repla
         self.operation = operation
     }
     
-    public func rewritingContexts<NewContext: CustomStringConvertible>(with contextRewriter: any ContextRewriter<Context,NewContext>) throws -> any Replacement<NewContext> {
+    public func rewritingContexts<NewContext>(with contextRewriter: any ContextRewriter<Context,NewContext>) throws -> any Replacement<NewContext> {
         ReplacementOf4GroupsRegex<NewContext>(
             description,
             contexts: try contexts?.map{ try contextRewriter.rewrite($0) },
@@ -758,7 +758,7 @@ public struct ReplacementOf4GroupsRegex<Context: CustomStringConvertible>: Repla
     }
 }
 
-public struct ReplacementOf5GroupsRegex<Context: CustomStringConvertible>: Replacement<Context>, @unchecked Sendable {
+public struct ReplacementOf5GroupsRegex<Context>: Replacement<Context>, @unchecked Sendable {
     
     public let description: String?
     public let contexts: [Context]?
@@ -791,7 +791,7 @@ public struct ReplacementOf5GroupsRegex<Context: CustomStringConvertible>: Repla
         self.operation = operation
     }
     
-    public func rewritingContexts<NewContext: CustomStringConvertible>(with contextRewriter: any ContextRewriter<Context,NewContext>) throws -> any Replacement<NewContext> {
+    public func rewritingContexts<NewContext>(with contextRewriter: any ContextRewriter<Context,NewContext>) throws -> any Replacement<NewContext> {
         ReplacementOf5GroupsRegex<NewContext>(
             description,
             contexts: try contexts?.map{ try contextRewriter.rewrite($0) },
@@ -806,7 +806,7 @@ public struct ReplacementOf5GroupsRegex<Context: CustomStringConvertible>: Repla
     }
 }
 
-public struct ReplacementOf6GroupsRegex<Context: CustomStringConvertible>: Replacement<Context>, @unchecked Sendable {
+public struct ReplacementOf6GroupsRegex<Context>: Replacement<Context>, @unchecked Sendable {
     
     public let description: String?
     public let contexts: [Context]?
@@ -839,7 +839,7 @@ public struct ReplacementOf6GroupsRegex<Context: CustomStringConvertible>: Repla
         self.operation = operation
     }
     
-    public func rewritingContexts<NewContext: CustomStringConvertible>(with contextRewriter: any ContextRewriter<Context,NewContext>) throws -> any Replacement<NewContext> {
+    public func rewritingContexts<NewContext>(with contextRewriter: any ContextRewriter<Context,NewContext>) throws -> any Replacement<NewContext> {
         ReplacementOf6GroupsRegex<NewContext>(
             description,
             contexts: try contexts?.map{ try contextRewriter.rewrite($0) },
@@ -854,7 +854,7 @@ public struct ReplacementOf6GroupsRegex<Context: CustomStringConvertible>: Repla
     }
 }
 
-public struct ReplacementOf7GroupsRegex<Context: CustomStringConvertible>: Replacement<Context>, @unchecked Sendable {
+public struct ReplacementOf7GroupsRegex<Context>: Replacement<Context>, @unchecked Sendable {
     
     public let description: String?
     public let contexts: [Context]?
@@ -887,7 +887,7 @@ public struct ReplacementOf7GroupsRegex<Context: CustomStringConvertible>: Repla
         self.operation = operation
     }
     
-    public func rewritingContexts<NewContext: CustomStringConvertible>(with contextRewriter: any ContextRewriter<Context,NewContext>) throws -> any Replacement<NewContext> {
+    public func rewritingContexts<NewContext>(with contextRewriter: any ContextRewriter<Context,NewContext>) throws -> any Replacement<NewContext> {
         ReplacementOf7GroupsRegex<NewContext>(
             description,
             contexts: try contexts?.map{ try contextRewriter.rewrite($0) },
@@ -902,7 +902,7 @@ public struct ReplacementOf7GroupsRegex<Context: CustomStringConvertible>: Repla
     }
 }
 
-public struct ReplacementOf8GroupsRegex<Context: CustomStringConvertible>: Replacement<Context>, @unchecked Sendable {
+public struct ReplacementOf8GroupsRegex<Context>: Replacement<Context>, @unchecked Sendable {
     
     public let description: String?
     public let contexts: [Context]?
@@ -935,7 +935,7 @@ public struct ReplacementOf8GroupsRegex<Context: CustomStringConvertible>: Repla
         self.operation = operation
     }
     
-    public func rewritingContexts<NewContext: CustomStringConvertible>(with contextRewriter: any ContextRewriter<Context,NewContext>) throws -> any Replacement<NewContext> {
+    public func rewritingContexts<NewContext>(with contextRewriter: any ContextRewriter<Context,NewContext>) throws -> any Replacement<NewContext> {
         ReplacementOf8GroupsRegex<NewContext>(
             description,
             contexts: try contexts?.map{ try contextRewriter.rewrite($0) },
@@ -950,7 +950,7 @@ public struct ReplacementOf8GroupsRegex<Context: CustomStringConvertible>: Repla
     }
 }
 
-public struct ReplacementOf9GroupsRegex<Context: CustomStringConvertible>: Replacement<Context>, @unchecked Sendable {
+public struct ReplacementOf9GroupsRegex<Context>: Replacement<Context>, @unchecked Sendable {
     
     public let description: String?
     public let contexts: [Context]?
@@ -983,7 +983,7 @@ public struct ReplacementOf9GroupsRegex<Context: CustomStringConvertible>: Repla
         self.operation = operation
     }
     
-    public func rewritingContexts<NewContext: CustomStringConvertible>(with contextRewriter: any ContextRewriter<Context,NewContext>) throws -> any Replacement<NewContext> {
+    public func rewritingContexts<NewContext>(with contextRewriter: any ContextRewriter<Context,NewContext>) throws -> any Replacement<NewContext> {
         ReplacementOf9GroupsRegex<NewContext>(
             description,
             contexts: try contexts?.map{ try contextRewriter.rewrite($0) },
@@ -998,7 +998,7 @@ public struct ReplacementOf9GroupsRegex<Context: CustomStringConvertible>: Repla
     }
 }
 
-public struct ReplacementOf10GroupsRegex<Context: CustomStringConvertible>: Replacement<Context>, @unchecked Sendable {
+public struct ReplacementOf10GroupsRegex<Context>: Replacement<Context>, @unchecked Sendable {
     
     public let description: String?
     public let contexts: [Context]?
@@ -1031,7 +1031,7 @@ public struct ReplacementOf10GroupsRegex<Context: CustomStringConvertible>: Repl
         self.operation = operation
     }
     
-    public func rewritingContexts<NewContext: CustomStringConvertible>(with contextRewriter: any ContextRewriter<Context,NewContext>) throws -> any Replacement<NewContext> {
+    public func rewritingContexts<NewContext>(with contextRewriter: any ContextRewriter<Context,NewContext>) throws -> any Replacement<NewContext> {
         ReplacementOf10GroupsRegex<NewContext>(
             description,
             contexts: try contexts?.map{ try contextRewriter.rewrite($0) },
@@ -1046,7 +1046,7 @@ public struct ReplacementOf10GroupsRegex<Context: CustomStringConvertible>: Repl
     }
 }
 
-public struct ReplacementByOperation<Context: CustomStringConvertible>: Replacement<Context>, @unchecked Sendable {
+public struct ReplacementByOperation<Context>: Replacement<Context>, @unchecked Sendable {
     
     public let description: String?
     public let contexts: [Context]?
@@ -1075,7 +1075,7 @@ public struct ReplacementByOperation<Context: CustomStringConvertible>: Replacem
         self.operation = operation
     }
     
-    public func rewritingContexts<NewContext: CustomStringConvertible>(with contextRewriter: any ContextRewriter<Context,NewContext>) throws -> any Replacement<NewContext> {
+    public func rewritingContexts<NewContext>(with contextRewriter: any ContextRewriter<Context,NewContext>) throws -> any Replacement<NewContext> {
         ReplacementByOperation<NewContext>(
             description,
             contexts: try contexts?.map{ try contextRewriter.rewrite($0) },
